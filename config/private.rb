@@ -1,1 +1,1 @@
-token = 'fishnetsapp'
+TOKEN = 'fishnetsapp'
