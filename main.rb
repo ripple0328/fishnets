@@ -38,12 +38,12 @@ post '/access' do
     from = message.FromUserName
     to = message.ToUserName
     content = message.Content
-    $body = content+message.class.to_s
     if message.class == Weixin::TextMessage
 
         if content == 'Hello2BizUser'
             reply_msg= "你好啊, #{from}"
         else
+          $body = 'qq'
           reply_msg = talk_to_bot(content)
         end
     end
