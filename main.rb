@@ -45,7 +45,7 @@ get '/access' do
 end
 
 get '/' do
-  'H'+BODY.to_s
+  BODY
 end
 
 post '/access'  do
