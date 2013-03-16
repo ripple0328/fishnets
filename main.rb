@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 get '/' do
   'hello'
 end
@@ -41,12 +42,13 @@ post '/access' do
     if message.class == Weixin::TextMessage
         content = message.Content
         if content == 'Hello2BizUser'
-            reply_msg_content = "Thx, #{reply_msg_content}"
+            reply_msg= "你好啊, #{from}"
         else
-          reply_msg_content = talk_to_bot(content)
+          #reply_msg = talk_to_bot(content)
+          reply_msg = "QQ"
         end
     end
 
-    create_message(settings.wx_id, from, 'text', reply_msg_content)
+    create_message(settings.wx_id, from, 'text', reply_msg)
 end
 
