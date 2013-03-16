@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
-BODY = 'hello'
+$body = 'hello'
 get '/' do
-  BODY
+  $body
 end
 
-use Weixin::Middleware, 'fishnets', '/access' 
+use Weixin::Middleware, TOKEN, '/access' 
 
-configure do
-    set :wx_id, 'fishnets'
-end
 
 helpers do
 
@@ -35,12 +32,12 @@ end
 
 post '/access' do
     content_type :xml, 'charset' => 'utf-8'
-    BODY = 'heihei'
+    $body = 'heihei'
     message = request.env[Weixin::Middleware::WEIXIN_MSG]
     logger.info "message: #{request.env[Weixin::Middleware::WEIXIN_MSG_RAW]}"
 
     from = message.FromUserName
-
+    to = message.ToUserName
     if message.class == Weixin::TextMessage
         content = message.Content
         if content == 'Hello2BizUser'
@@ -51,6 +48,6 @@ post '/access' do
         end
     end
 
-    create_message(settings.wx_id, from, 'text', reply_msg)
+    create_message(to, from, 'text', reply_msg)
 end
 
