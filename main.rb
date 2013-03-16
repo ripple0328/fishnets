@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+# for debug
 $body = 'hello'
 get '/' do
   $body
@@ -18,7 +20,7 @@ helpers do
     end
     
     def talk_to_bot(msg)
-      @url = DOIDO
+      @url = CHATBOT_API
       @post_param = {'say' => msg}
       begin
         @return = Net::HTTP.post_form(URI.parse(@url),@post_param)
@@ -45,7 +47,7 @@ post '/access' do
     if message.class == Weixin::TextMessage
 
         if content == 'Hello2BizUser'
-            reply_msg= "你好啊, #{from}"
+            reply_msg= "你好啊, #{from}, 欢迎订阅"
         else
           reply_msg = talk_to_bot(content)
           $body = reply_msg

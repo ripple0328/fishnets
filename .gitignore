@@ -1,4 +1,6 @@
+*#
+*~
 .idea/
-/Gemfile~
-/config.ru~
-/config/environment.rb~
+.#*
+config/private.rb
+main.rb.bak
