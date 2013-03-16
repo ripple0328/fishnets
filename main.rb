@@ -31,6 +31,7 @@ end
 #   create_message(settings.wx_id, from, 'text', reply_msg_content)
 # end
 
+BODY = 'e'
 get '/access' do
   @pre_digest = [TOKEN, request[:timestamp],request[:nonce]].sort.join
   @digest = Digest::SHA1.hexdigest(@pre_digest)
@@ -44,7 +45,7 @@ get '/access' do
 end
 
 get '/' do
-  'H'+BODY
+  'H'+BODY.to_s
 end
 
 post '/access'  do
@@ -60,7 +61,7 @@ post '/access'  do
   @return = Net::HTTP.post_form(URI.parse(@url),@post_param)
   @replay = Nokogiri::HTML(@return.body).text
 
-  BODY = @page
+  BODY = @body
   
   @to_user = "
    <xml>
