@@ -20,8 +20,12 @@ helpers do
     def talk_to_bot(msg)
       @url = DOIDO
       @post_param = {'say' => msg}
-      @return = Net::HTTP.post_form(URI.parse(@url),@post_param)
-      @replay = Nokogiri::HTML(@return.body).text
+      begin
+        @return = Net::HTTP.post_form(URI.parse(@url),@post_param)
+        @replay = Nokogiri::HTML(@return.body).text
+      rescue Exception => e
+        @replay = "机器人太忙，歇会--#{e.to_s}"
+      end
     end
 end
 
@@ -44,7 +48,6 @@ post '/access' do
             reply_msg= "你好啊, #{from}"
         else
           reply_msg = talk_to_bot(content)
-          reply_msg = "机器人太忙休息会吧"  unless reply_msg
           $body = reply_msg
         end
     end
