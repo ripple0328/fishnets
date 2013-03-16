@@ -2,5 +2,5 @@
 *~
 .idea/
 .#*
-config/private.rb
 main.rb.bak
+config/private.rb
