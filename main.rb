@@ -50,14 +50,13 @@ end
 
 post '/access'  do
   begin
-    @body = request.env
-    BODY= @body
+    @body = request.body
+    @page = Nokogiri::XML(@body)
+    @msg = @page.at_xpath('xml/Content').text
+    BODY = @msg
   rescue Exception => e
     BODY = e.to_s
   end
-
-  @page = Nokogiri::XML(@body)
-  @msg = @page.at_xpath('xml/Content').text
   @dev = @page.at_xpath('xml/ToUserName').text
   @user = @page.at_xpath('xml/FromUserName').text
   @msg_type = @page.at_xpath('xml/MsgType').text
