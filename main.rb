@@ -49,7 +49,7 @@ get '/' do
 end
 
 post '/access'  do
-  @body = request.body
+  @body = request.env[POST_BODY].read
   BODY = @body
 
   @page = Nokogiri::XML(@body)
