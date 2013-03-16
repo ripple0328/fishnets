@@ -35,12 +35,12 @@ end
 
 post '/access' do
     content_type :xml, 'charset' => 'utf-8'
-
+    body = 'heihei'
     message = request.env[Weixin::Middleware::WEIXIN_MSG]
     logger.info "message: #{request.env[Weixin::Middleware::WEIXIN_MSG_RAW]}"
 
     from = message.FromUserName
-    body = from
+
     if message.class == Weixin::TextMessage
         content = message.Content
         if content == 'Hello2BizUser'
