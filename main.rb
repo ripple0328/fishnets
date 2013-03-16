@@ -37,6 +37,7 @@ post '/access' do
 
     from = message.FromUserName
     to = message.ToUserName
+    
     if message.class == Weixin::TextMessage
         content = message.Content
         if content == 'Hello2BizUser'
@@ -44,8 +45,9 @@ post '/access' do
         else
           reply_msg = talk_to_bot(content)
         end
+      $body = content
     end
-    $body = reply_msg
+    
     create_message(to, from, 'text', reply_msg)
 end
 
