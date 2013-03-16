@@ -38,7 +38,7 @@ post '/access' do
     from = message.FromUserName
     to = message.ToUserName
     content = message.Content
-    $body = content
+    $body = content+message.class.to_s
     if message.class == Weixin::TextMessage
 
         if content == 'Hello2BizUser'
