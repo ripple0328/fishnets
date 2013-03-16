@@ -37,9 +37,10 @@ post '/access' do
 
     from = message.FromUserName
     to = message.ToUserName
-    $body = from
+    content = message.Content
+    $body = content
     if message.class == Weixin::TextMessage
-        content = message.Content
+
         if content == 'Hello2BizUser'
             reply_msg= "你好啊, #{from}"
         else
