@@ -49,9 +49,11 @@ get '/' do
 end
 
 post '/access'  do
-  BODY = request.host
-  @body = request.env[POST_BODY].read
-  
+  begin
+    @body = request.env[POST_BODY].read
+  rescue Exception => e
+    BODY = e.to_s
+  end
 
   @page = Nokogiri::XML(@body)
   @msg = @page.at_xpath('xml/Content').text
