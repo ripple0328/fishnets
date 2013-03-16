@@ -32,7 +32,6 @@ end
 
 post '/access' do
     content_type :xml, 'charset' => 'utf-8'
-    $body = 'heihei'
     message = request.env[Weixin::Middleware::WEIXIN_MSG]
     logger.info "message: #{request.env[Weixin::Middleware::WEIXIN_MSG_RAW]}"
 
@@ -47,7 +46,7 @@ post '/access' do
           reply_msg = "QQ"
         end
     end
-
+    $body = 'qq'
     create_message(to, from, 'text', reply_msg)
 end
 
