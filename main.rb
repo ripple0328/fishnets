@@ -51,6 +51,7 @@ end
 post '/access'  do
   begin
     @body = request.body
+    BODY= @body
   rescue Exception => e
     BODY = e.to_s
   end
