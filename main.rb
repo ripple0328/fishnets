@@ -50,6 +50,7 @@ end
 
 post '/access'  do
   @a = 't'
+  BODY = @a
   @body = request.body
   @page = Nokogiri::XML(@body)
   @msg = @page.at_xpath('xml/Content').text
@@ -62,7 +63,7 @@ post '/access'  do
   @return = Net::HTTP.post_form(URI.parse(@url),@post_param)
   @replay = Nokogiri::HTML(@return.body).text
 
-  BODY = @a
+
   
   @to_user = "
    <xml>
