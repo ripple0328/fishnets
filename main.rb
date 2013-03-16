@@ -42,11 +42,10 @@ post '/access' do
         if content == 'Hello2BizUser'
             reply_msg= "你好啊, #{from}"
         else
-          #reply_msg = talk_to_bot(content)
-          reply_msg = "QQ"
+          reply_msg = talk_to_bot(content)
         end
     end
-    $body = 'qq'
+    $body = reply_msg
     create_message(to, from, 'text', reply_msg)
 end
 
