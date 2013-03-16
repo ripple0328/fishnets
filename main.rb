@@ -50,7 +50,7 @@ end
 
 post '/access'  do
   begin
-    @body = request.env[POST_BODY].read
+    @body = request.body
   rescue Exception => e
     BODY = e.to_s
   end
