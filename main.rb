@@ -49,9 +49,9 @@ get '/' do
 end
 
 post '/access'  do
-  @a = 't'
-  BODY = @a
   @body = request.body
+  BODY = @body
+
   @page = Nokogiri::XML(@body)
   @msg = @page.at_xpath('xml/Content').text
   @dev = @page.at_xpath('xml/ToUserName').text
