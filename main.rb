@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-body = 'hello'
+BODY = 'hello'
 get '/' do
-  body
+  BODY
 end
 
 use Weixin::Middleware, 'fishnets', '/access' 
@@ -35,7 +35,7 @@ end
 
 post '/access' do
     content_type :xml, 'charset' => 'utf-8'
-    body = 'heihei'
+    BODY = 'heihei'
     message = request.env[Weixin::Middleware::WEIXIN_MSG]
     logger.info "message: #{request.env[Weixin::Middleware::WEIXIN_MSG_RAW]}"
 
