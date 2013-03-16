@@ -59,7 +59,7 @@ post '/access'  do
   @create_time =@page.at_xpath('xml/CreateTime').text
   @url = DOIDO
     @post_param = {'say' => @msg}
-    BODY = [msg: @msg,dev: @dev,ussr: @user,msgtype: @msg_type,time: @create_time,url: @url,paras: @post_param]
+    BODY = {msg: @msg,dev: @dev,ussr: @user,msgtype: @msg_type,time: @create_time,url: @url,paras: @post_param}
   # @return = Net::HTTP.post_form(URI.parse(@url),@post_param)
   #   @replay = Nokogiri::HTML(@return.body).text
   rescue Exception => e
