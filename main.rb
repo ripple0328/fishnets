@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+body = 'hello'
 get '/' do
-  'hello'
+  body
 end
 
 use Weixin::Middleware, 'fishnets', '/access' 
@@ -39,6 +40,7 @@ post '/access' do
     logger.info "message: #{request.env[Weixin::Middleware::WEIXIN_MSG_RAW]}"
 
     from = message.FromUserName
+    body = from
     if message.class == Weixin::TextMessage
         content = message.Content
         if content == 'Hello2BizUser'
