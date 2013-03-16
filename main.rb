@@ -43,9 +43,9 @@ post '/access' do
         if content == 'Hello2BizUser'
             reply_msg= "你好啊, #{from}"
         else
-
           reply_msg = talk_to_bot(content)
-          $body = 'qq' + reply_msg.to_s
+          reply_msg = "机器人太忙休息会吧"  unless reply_msg
+          $body = reply_msg
         end
     end
     
