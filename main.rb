@@ -31,7 +31,7 @@ end
 #   create_message(settings.wx_id, from, 'text', reply_msg_content)
 # end
 
-BODY = 'e'
+body = 'e'
 get '/access' do
   @pre_digest = [TOKEN, request[:timestamp],request[:nonce]].sort.join
   @digest = Digest::SHA1.hexdigest(@pre_digest)
@@ -45,7 +45,7 @@ get '/access' do
 end
 
 get '/' do
-  BODY
+  body
 end
 
 post '/access'  do
@@ -53,7 +53,6 @@ post '/access'  do
     @body = request.body
     @page = Nokogiri::XML(@body)
     @msg = @page.at_xpath('xml/Content').text
-    BODY = "m"
 
     @dev = @page.at_xpath('xml/ToUserName').text
   @user = @page.at_xpath('xml/FromUserName').text
@@ -61,11 +60,11 @@ post '/access'  do
   @create_time =@page.at_xpath('xml/CreateTime').text
   @url = DOIDO
     @post_param = {'say' => @msg}
-    # BODY = {msg: @msg,dev: @dev,ussr: @user,msgtype: @msg_type,time: @create_time,url: @url,paras: @post_param}
+     body = {msg: @msg,dev: @dev,ussr: @user,msgtype: @msg_type,time: @create_time,url: @url,paras: @post_param}
   # @return = Net::HTTP.post_form(URI.parse(@url),@post_param)
-  #   @replay = Nokogiri::HTML(@return.body).text
+   #  @replay = Nokogiri::HTML(@return.body).text
   rescue Exception => e
-     BODY => e.to_s
+     body => e.to_s
   end
   
   # @to_user = "
