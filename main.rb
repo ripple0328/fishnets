@@ -1,6 +1,35 @@
-get '/'  do
-  "hello world"  
+# -*- coding: utf-8 -*-
+configure do
+  set :wx_id, 'fishnets'
 end
+
+helpers do
+
+  def create_message(from, to, type, content, flag=0)
+    msg = Weixin::TextReplyMessage.new
+    msg.ToUserName = to
+    msg.FromUserName = from
+    msg.Content = content
+    msg.to_xml
+  end
+end
+
+# post '/access' do
+#   content_type :xml, 'charset' => 'utf-8'
+
+#   message = request.env[Weixin::Middleware::WEIXIN_MSG]
+#   logger.info "message: #{request.env[Weixin::Middleware::WEIXIN_MSG_RAW]}"
+
+#   from = message.FromUserName
+#   if message.class == Weixin::TextMessage
+#     content = message.Content
+#     if content == 'Hello2BizUser'
+#       reply_msg_content = "感谢关注！#{reply_msg_content}"
+#     end
+#   end
+
+#   create_message(settings.wx_id, from, 'text', reply_msg_content)
+# end
 
 get '/access' do
   @pre_digest = [TOKEN, request[:timestamp],request[:nonce]].sort.join
@@ -10,9 +39,13 @@ get '/access' do
     @echo
   else
     'Error ' + @echo
+
   end
 end
 
+get '/' do
+  body
+end
 
 post '/access'  do
   @body = request.body
@@ -27,12 +60,14 @@ post '/access'  do
   @return = Net::HTTP.post_form(URI.parse(@url),@post_param)
   @replay = Nokogiri::HTML(@return.body).text
 
+  body = @body
+  
   @to_user = "
    <xml>
   <ToUserName><![CDATA[#{@user}]]></ToUserName>
   <FromUserName><![CDATA[#{@dev}]]></FromUserName>
-  <CreateTime>#{Time.now}</CreateTime>
-  <MsgType><![CDATA[#{@msg_type}]]></MsgType>
+  <CreateTime>#{@create_time}</CreateTime>
+  <MsgType><![CDATA[news]]></MsgType>
   <Content><![CDATA[#{@replay}]]></Content>
   <FuncFlag>0</FuncFlag>
   </xml> "
