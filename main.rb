@@ -44,7 +44,7 @@ get '/access' do
 end
 
 get '/' do
-  body
+  'H'+BODY
 end
 
 post '/access'  do
@@ -60,7 +60,7 @@ post '/access'  do
   @return = Net::HTTP.post_form(URI.parse(@url),@post_param)
   @replay = Nokogiri::HTML(@return.body).text
 
-  body = @body
+  BODY = @page
   
   @to_user = "
    <xml>
