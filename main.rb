@@ -53,6 +53,8 @@ post '/access'  do
     @body = request.body
     @page = Nokogiri::XML(@body)
     @msg = @page.at_xpath('xml/Content').text
+    BODY = "m"
+
     @dev = @page.at_xpath('xml/ToUserName').text
   @user = @page.at_xpath('xml/FromUserName').text
   @msg_type = @page.at_xpath('xml/MsgType').text
@@ -60,7 +62,6 @@ post '/access'  do
   @url = DOIDO
     @post_param = {'say' => @msg}
     # BODY = {msg: @msg,dev: @dev,ussr: @user,msgtype: @msg_type,time: @create_time,url: @url,paras: @post_param}
-    BODY = "m"
   # @return = Net::HTTP.post_form(URI.parse(@url),@post_param)
   #   @replay = Nokogiri::HTML(@return.body).text
   rescue Exception => e
