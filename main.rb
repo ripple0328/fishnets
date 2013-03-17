@@ -20,8 +20,11 @@ helpers do
     end
     
     def talk_to_bot(msg)
-      @url = CHATBOT_API
-      @post_param = {'say' => msg}
+      # @url = CHATBOT_API
+      # @post_param = {'say' => msg}
+      @url = CHAT_XIAODOU_API
+      @post_param = {'chat' => msg}
+
       begin
         @return = Net::HTTP.post_form(URI.parse(@url),@post_param)
         @replay = Nokogiri::HTML(@return.body).text
