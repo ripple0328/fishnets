@@ -33,7 +33,7 @@ helpers do
         # @return = Net::HTTP.post_form(URI.parse(@url),@post_param)
         # @reply = Nokogiri::HTML(@return.body).text
         #for xiaodou api
-        @url = @url + msg
+        @url = URI::encode(@url + msg)
         @reply = RestClient.post(@usl,{})
       rescue Exception => e
         @reply = "机器人太忙，歇会--#{e.to_s}"
