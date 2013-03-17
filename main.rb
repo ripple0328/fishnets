@@ -32,7 +32,9 @@ helpers do
         # @reply = Nokogiri::HTML(@return.body).text
         #for xiaodou api
         @u = URI::encode(CHAT_XIAODOU_API + msg)
+        $body = '1'+@u
         @reply = RestClient.post(@u,{})
+        $body = '2' +@reply
       rescue Exception => e
         @reply = "机器人太忙，歇会--#{e.to_s}"
       end
