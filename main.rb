@@ -25,16 +25,14 @@ helpers do
       # @post_param = {'say' => msg}
       # @post_param = {'chat' >= msg}
       
-      @url = CHAT_XIAODOU_API
-
       begin
         # for diodo robot api
         
         # @return = Net::HTTP.post_form(URI.parse(@url),@post_param)
         # @reply = Nokogiri::HTML(@return.body).text
         #for xiaodou api
-        @url = URI::encode(@url + msg)
-        @reply = RestClient.post(@usl,{})
+        @u = URI::encode(CHAT_XIAODOU_API + msg)
+        @reply = RestClient.post(@u,{})
       rescue Exception => e
         @reply = "机器人太忙，歇会--#{e.to_s}"
       end
