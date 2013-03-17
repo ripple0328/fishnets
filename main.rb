@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # for debug
-$body = 'hello'
 get '/' do
-  $body
 end
 
 use Weixin::Middleware, TOKEN, '/access' 
@@ -32,9 +30,7 @@ helpers do
         # @reply = Nokogiri::HTML(@return.body).text
         #for xiaodou api
         @u = URI::encode(CHAT_XIAODOU_API + msg)
-        $body = '1'+@u
         @reply = RestClient.post(@u,{})
-        $body = '2' +@reply
       rescue Exception => e
         @reply = "机器人太忙，歇会--#{e.to_s}"
       end
@@ -60,7 +56,6 @@ post '/access' do
             reply_msg= "你好啊, #{from}, 欢迎订阅"
         else
           reply_msg = talk_to_bot(content)
-          $body = reply_msg
         end
     end
     
