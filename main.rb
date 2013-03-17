@@ -20,16 +20,23 @@ helpers do
     end
     
     def talk_to_bot(msg)
+      # for diodo robot api
       # @url = CHATBOT_API
       # @post_param = {'say' => msg}
+      # @post_param = {'chat' >= msg}
+      
       @url = CHAT_XIAODOU_API
-      @post_param = {'chat' => msg}
 
       begin
-        @return = Net::HTTP.post_form(URI.parse(@url),@post_param)
-        @replay = Nokogiri::HTML(@return.body).text
+        # for diodo robot api
+        
+        # @return = Net::HTTP.post_form(URI.parse(@url),@post_param)
+        # @reply = Nokogiri::HTML(@return.body).text
+        #for xiaodou api
+        @url = @url + msg
+        @reply = RestClient.post(@usl,{})
       rescue Exception => e
-        @replay = "机器人太忙，歇会--#{e.to_s}"
+        @reply = "机器人太忙，歇会--#{e.to_s}"
       end
     end
 end
