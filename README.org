@@ -1,4 +1,14 @@
 
 微信文本聊天机器人
 
+试了以下几个机器人，大部分都有请求数目限制，或者不太稳定，wolframalpha是类似siri
+的只能问答机器人功能最为强大，但是不支持中文，切是商用的，每月限制2000次请求。
+1. 小豆机器人
+	 [[http://xiao.douqq.com/bot/chata.php?chat=][api]]
+2. 小爱机器人
+	 [[http://nlp.xiaoi.com/robot/demo/wap/wap-demo.action][这个纯从网页抓的]]
+3. DOIDO机器人
+	 [[http://doido.sinaapp.com/chat/][这个部署在sinaapp，访问者太多没云豆了]]
+4. wolframalpha这个就爽多了，官方支持的api，支持很多参数去对回复内容进行设置。返
+   回xml格式数据，当然就是要付费。
 
