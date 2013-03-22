@@ -53,7 +53,7 @@ post '/access' do
     if message.class == Weixin::TextMessage
 
         if content == 'Hello2BizUser'
-            reply_msg= "你好啊, #{from}, 欢迎订阅"
+            reply_msg= WELCOME_BANNER
         else
           reply_msg = talk_to_bot(content)
         end
