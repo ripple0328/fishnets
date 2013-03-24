@@ -35,10 +35,9 @@ helpers do
       rescue Exception => e
         @reply = "查不到--#{e.to_s}"
       end
-        
+      
     end
 
-    end
     def talk_to_bot(msg)
       # for diodo robot api
       # @url = CHATBOT_API
