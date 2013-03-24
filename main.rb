@@ -18,21 +18,25 @@ helpers do
     end
 
     def query_ur_secret(info)
-      u = URI::encode(SECRET_API + info)
-      reply = RestClient.post(u,{})
-      page = Nokogiri::HTML(reply.body,nil, "GB18030")
-      table = page.css("table tr")
-      reply = ''
-      table.each do |tr|
-        ts = '|'
-        tr.css('td').each do |td|
-          ts << td.text + '|'
+      begin
+        u = URI::encode(SECRET_API + info)
+        reply = RestClient.post(u,{})
+        page = Nokogiri::HTML(reply.body,nil, "GB18030")
+        table = page.css("table tr")
+        reply = ''
+        table.each do |tr|
+          ts = '|'
+          tr.css('td').each do |td|
+            ts << td.text + '|'
+          end
+          reply << ts + '\n'
         end
-        ts << '\n'
-        reply << ts
+        return reply
+      rescue Exception => e
+        @reply = "查不到--#{e.to_s}"
       end
-      return reply
-  end
+        
+    end
 
     end
     def talk_to_bot(msg)
