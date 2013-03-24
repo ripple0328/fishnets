@@ -7,4 +7,6 @@ CHAT_XIAODOU_API='http://xiao.douqq.com/bot/chata.php?chat='
 WORLFRAM_APPID="KQK7JP-HKXYAXQ279"
 # http://products.wolframalpha.com/docs/WolframAlpha-API-Reference.pdf
 
-WELCOME_BANNER = "欢迎和机器人聊天，机器人很忙的，没回复您请多说几句或者歇会再聊哈"
+SECRET_API = 'http://www.sqlku.com/?wd='
+
+WELCOME_BANNER = "查询个人泄露信息 请以s开头加空格然后加个人邮箱或者qq号码，如s mymail@example.com 其它格式信息视为聊天"

@@ -16,7 +16,25 @@ helpers do
         msg.Content = content
         msg.to_xml
     end
-    
+
+    def query_ur_secret(info)
+      u = URI::encode(SECRET_API + info)
+      reply = RestClient.post(u,{})
+      page = Nokogiri::HTML(reply.body,nil, "GB18030")
+      table = page.css("table tr")
+      reply = ''
+      table.each do |tr|
+        ts = '|'
+        tr.css('td').each do |td|
+          ts << td.text + '|'
+        end
+        ts << '\n'
+        reply << ts
+      end
+      return reply
+  end
+
+    end
     def talk_to_bot(msg)
       # for diodo robot api
       # @url = CHATBOT_API
@@ -53,7 +71,9 @@ post '/access' do
     if message.class == Weixin::TextMessage
 
         if content == 'Hello2BizUser'
-            reply_msg= WELCOME_BANNER
+          reply_msg= WELCOME_BANNER
+        elsif content.strip =~ /^[s]/
+          reply_msg = query_ur_secret(content.split[1].strip)
         else
           reply_msg = talk_to_bot(content)
         end
